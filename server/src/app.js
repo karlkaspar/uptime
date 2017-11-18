@@ -6,14 +6,16 @@ const morgan = require('morgan')
 
 const app = express()
 app.use(morgan('combined'))
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
 app.use(bodyParser.json())
 app.use(cors())
 
 // IF PATH = STATUS CAN DO ANYTHING
-app.get('/status', (req, res) => {
-  res.send({
-    message: 'Jiai'
-  })
+app.post('/register', (req, res) => {
+  console.log(req.body + 'jiaie')
+  res.send(`Hello ${req.body.email} !`)
 })
 
 console.log('Server running @' + port)
