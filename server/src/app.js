@@ -14,7 +14,7 @@ app.use(cors())
 
 // IF PATH = STATUS CAN DO ANYTHING
 app.post('/register', (req, res) => {
-  console.log(req.body + 'jiaie')
+  console.log('Hello' + req.body)
   res.send(`Hello ${req.body.email} !`)
 })
 

@@ -1,37 +1,45 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }} REGISTER</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div class="col-md-12 col-sm-12 mainContainer">
+    <div class="col-md-12">
+      <h1>Registration</h1>
+        <div class="form-container col-md-6 col-sm-12 centered">
+          <div class="form-group">
+            <label for="usr">E-mail:</label>
+            <input v-model="email" type="text" name="email" placeholder="mymail@mail.com" class="form-control" id="usr">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input v-model="password" type="password" name="password" placeholder="*****" class="form-control" id="pwd">
+          </div>
+          <button @click="register" type="button" class="btn btn-primary">Register</button>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
+import AuthenticationService from '../../services/AuthenticationService'
 export default {
-  name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async register () {
+      console.log('register()', this.email, this.password)
+      const response = await AuthenticationService.register({
+        email: this.email,
+        password: this.password
+      })
+      console.log(response.data)
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- SCOPED CSS -->
 <style scoped>
 h1, h2 {
   font-weight: normal;
